@@ -64,8 +64,25 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  function initFilter(wrapper) {
+    const input = wrapper.querySelector('.table-filter');
+    const table = wrapper.querySelector('table.sortable-table');
+    if (!input || !table) return;
+    input.addEventListener('input', function () {
+      const q = input.value.trim().toLowerCase();
+      const rows = table.tBodies[0].rows;
+      Array.prototype.forEach.call(rows, function (row) {
+        const tickerCell = row.querySelector('td.ticker');
+        const text = (tickerCell ? tickerCell.textContent : '').toLowerCase();
+        row.style.display = q && text.indexOf(q) === -1 ? 'none' : '';
+      });
+    });
+  }
+
   const tables = document.querySelectorAll('table.sortable-table');
   Array.prototype.forEach.call(tables, initTable);
+  const wrappers = document.querySelectorAll('.table-wrapper');
+  Array.prototype.forEach.call(wrappers, initFilter);
 });
 
 

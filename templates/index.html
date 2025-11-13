@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+  {% if page_title %}
+  <h2 class="page-title">{{ page_title }}</h2>
+  {% endif %}
   <div class="universe-grid">
     {% for universe_name, rows in universe_sections %}
       <section class="universe-card">
@@ -8,6 +11,9 @@
           <span class="count-pill">{{ rows|length }} / {{ total_counts.get(universe_name, 0) }}</span>
         </div>
         <div class="table-wrapper">
+          <div class="table-tools">
+            <input type="text" class="table-filter" placeholder="Filter tickers..." aria-label="Filter table by ticker">
+          </div>
           <table class="sortable-table">
             <thead>
               <tr>

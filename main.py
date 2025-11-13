@@ -55,6 +55,7 @@ def india(request: Request) -> HTMLResponse:
             "request": request,
             "universe_sections": universe_sections,
             "total_counts": {u: len(UNIVERSE_SYMBOLS.get(u, [])) for u in ordered_universes},
+            "page_title": "India",
         },
     )
 
@@ -74,6 +75,7 @@ def us(request: Request) -> HTMLResponse:
             "request": request,
             "universe_sections": universe_sections,
             "total_counts": {u: len(universes.get(u, [])) for u in ordered},
+            "page_title": "United States",
         },
     )
 
@@ -93,6 +95,7 @@ def germany(request: Request) -> HTMLResponse:
             "request": request,
             "universe_sections": universe_sections,
             "total_counts": {u: len(universes.get(u, [])) for u in ordered},
+            "page_title": "Germany",
         },
     )
 

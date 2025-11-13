@@ -24,7 +24,10 @@ html, body {
   background: linear-gradient(180deg, #0d1624, #0b111b);
 }
 .app-header .container { padding: 18px 0; }
+.header-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .app-header h1 { margin: 0; font-size: 22px; letter-spacing: 0.3px; }
+.nav a { color: var(--text); text-decoration: none; margin-left: 14px; font-size: 14px; opacity: 0.85; }
+.nav a:hover { color: var(--accent); opacity: 1; }
 .subtitle { margin: 4px 0 0 0; color: var(--muted); font-size: 13px; }
 
 .app-footer {
@@ -34,6 +37,8 @@ html, body {
   margin-top: 24px;
 }
 .app-footer .container { padding: 12px 0; }
+
+.page-title { margin: 18px 0 0 2px; font-size: 18px; color: var(--muted); font-weight: 600; }
 
 .universe-grid {
   display: grid;
@@ -79,6 +84,20 @@ html, body {
   width: 100%;
   overflow: auto;
 }
+.table-tools {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 10px 0 10px;
+}
+.table-filter {
+  background: #0c1522;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 6px;
+  min-width: 180px;
+}
+.table-filter:focus { outline: 1px solid var(--accent); }
 table {
   border-collapse: collapse;
   width: 100%;
@@ -101,5 +120,6 @@ tbody tr.above200 .strong { color: var(--green); font-weight: 600; }
 tbody tr.below200 .strong { color: var(--red); font-weight: 600; }
 .num { font-variant-numeric: tabular-nums; }
 .sort-indicator { color: var(--muted); margin-left: 6px; font-size: 10px; }
+tbody tr:nth-child(2n) { background: rgba(255, 255, 255, 0.02); }
 
 
