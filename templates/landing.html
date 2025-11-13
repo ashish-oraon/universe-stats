@@ -1,21 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="universe-grid">
-    <section class="universe-card">
-      <div class="card-header"><h2>Regions</h2></div>
-      <div class="table-wrapper">
-        <table class="sortable-table">
-          <thead>
-            <tr><th>Region</th><th>Link</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>India</td><td><a href="/india">/india</a></td></tr>
-            <tr><td>United States</td><td><a href="/us">/us</a></td></tr>
-            <tr><td>Germany</td><td><a href="/germany">/germany</a></td></tr>
-          </tbody>
-        </table>
+  <div class="home-grid">
+    <a href="/india" class="region-card">
+      <div class="region-icon">🇮🇳</div>
+      <h2>India</h2>
+      <p class="region-desc">NSE stocks - H-SUPER45, H-GOOD45, H-GOOD200</p>
+      <div class="region-stats">
+        <span>{{ total_counts.get("H-SUPER45", 0) }} SUPER</span>
+        <span>{{ total_counts.get("H-GOOD45", 0) }} GOOD</span>
+        <span>{{ total_counts.get("H-GOOD200", 0) }} GOOD200</span>
       </div>
-    </section>
+    </a>
+    <a href="/us" class="region-card">
+      <div class="region-icon">🇺🇸</div>
+      <h2>United States</h2>
+      <p class="region-desc">US market stocks - Complete classification</p>
+      <div class="region-stats">
+        <span>{{ us_count }} stocks</span>
+      </div>
+    </a>
+    <a href="/germany" class="region-card">
+      <div class="region-icon">🇩🇪</div>
+      <h2>Germany</h2>
+      <p class="region-desc">German market stocks - Complete classification</p>
+      <div class="region-stats">
+        <span>{{ ger_count }} stocks</span>
+      </div>
+    </a>
   </div>
 {% endblock %}
 

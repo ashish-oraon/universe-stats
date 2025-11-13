@@ -10,7 +10,7 @@
           <h2>{{ universe_name }}</h2>
           <span class="count-pill">{{ rows|length }} / {{ total_counts.get(universe_name, 0) }}</span>
         </div>
-        <div class="table-wrapper">
+        <div class="table-wrapper universe-section" data-region="{{ region }}" data-universe="{{ universe_name }}">
           <div class="table-tools">
             <input type="text" class="table-filter" placeholder="Filter tickers..." aria-label="Filter table by ticker">
           </div>
@@ -28,32 +28,8 @@
                 <th data-key="pct_from_52w_high">% From High <span class="sort-indicator"></span></th>
               </tr>
             </thead>
-            <tbody>
-              {% for r in rows %}
-                <tr class="{% if r.price and r.sma200 and r.price >= r.sma200 %}above200{% else %}below200{% endif %}">
-                  <td class="ticker">{{ r.symbol }}</td>
-                  <td class="num">{{ "%.2f"|format(r.price) if r.price is not none else "-" }}</td>
-                  <td class="num">{{ "%.2f"|format(r.sma50) if r.sma50 is not none else "-" }}</td>
-                  <td class="num">{{ "%.2f"|format(r.sma200) if r.sma200 is not none else "-" }}</td>
-                  <td class="num strong">
-                    {% if r.pct_above_200dma is not none %}
-                      {{ "%.2f"|format(r.pct_above_200dma) }}%
-                    {% else %}-{% endif %}
-                  </td>
-                  <td class="num">{{ "%.2f"|format(r.low_52w) if r.low_52w is not none else "-" }}</td>
-                  <td class="num">{{ "%.2f"|format(r.high_52w) if r.high_52w is not none else "-" }}</td>
-                  <td class="num">
-                    {% if r.pct_from_52w_low is not none %}
-                      {{ "%.2f"|format(r.pct_from_52w_low) }}%
-                    {% else %}-{% endif %}
-                  </td>
-                  <td class="num">
-                    {% if r.pct_from_52w_high is not none %}
-                      {{ "%.2f"|format(r.pct_from_52w_high) }}%
-                    {% else %}-{% endif %}
-                  </td>
-                </tr>
-              {% endfor %}
+            <tbody class="data-body">
+              <tr class="loading"><td colspan="9">Loading…</td></tr>
             </tbody>
           </table>
         </div>
