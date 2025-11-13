@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hemant Jain Universe Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="container">
+        <h1>Hemant Jain Stock Universe</h1>
+        <p class="subtitle">Live stats for H-SUPER45, H-GOOD45, H-GOOD200</p>
+      </div>
+    </header>
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="app-footer">
+      <div class="container">
+        <span>Data source: Yahoo Finance</span>
+      </div>
+    </footer>
+    <script src="/static/sort.js"></script>
+  </body>
+  </html>
+
+

@@ -1,0 +1,105 @@
+:root {
+  --bg: #0b111b;
+  --bg-elev: #101826;
+  --text: #e6edf3;
+  --muted: #9fb0c3;
+  --accent: #3da9fc;
+  --green: #35d07f;
+  --red: #ff6b6b;
+  --border: #203047;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+.container { width: 95%; max-width: 1400px; margin: 0 auto; }
+
+.app-header {
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #0d1624, #0b111b);
+}
+.app-header .container { padding: 18px 0; }
+.app-header h1 { margin: 0; font-size: 22px; letter-spacing: 0.3px; }
+.subtitle { margin: 4px 0 0 0; color: var(--muted); font-size: 13px; }
+
+.app-footer {
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 24px;
+}
+.app-footer .container { padding: 12px 0; }
+
+.universe-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  padding: 18px 0 28px 0;
+}
+@media (min-width: 1100px) {
+  .universe-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.universe-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: #0f1a2a;
+  border-bottom: 1px solid var(--border);
+}
+.card-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.count-pill {
+  font-size: 12px;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  background: #0c1522;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow: auto;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+}
+thead th {
+  position: sticky;
+  top: 0;
+  background: #0f1a2a;
+  z-index: 1;
+}
+th, td {
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+}
+td.ticker, th:first-child { text-align: left; }
+tbody tr:hover { background: rgba(61, 169, 252, 0.07); }
+tbody tr.above200 .strong { color: var(--green); font-weight: 600; }
+tbody tr.below200 .strong { color: var(--red); font-weight: 600; }
+.num { font-variant-numeric: tabular-nums; }
+.sort-indicator { color: var(--muted); margin-left: 6px; font-size: 10px; }
+
+
