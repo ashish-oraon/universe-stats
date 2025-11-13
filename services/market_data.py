@@ -23,19 +23,21 @@ class TickerStats:
         return asdict(self)
 
 
-def to_yf_symbol(symbol: str) -> str:
+def to_yf_symbol(symbol: str, default_suffix: Optional[str] = None) -> str:
     """
-    Convert a raw NSE symbol into a Yahoo symbol.
-    Rule: if it has no suffix, append .NS; otherwise keep as-is.
+    Convert a raw symbol into a Yahoo symbol.
+    Rule: if it has no dot suffix, append .{default_suffix} when provided; otherwise keep as-is.
     """
     symbol = symbol.strip().upper()
     if "." in symbol:
         return symbol
-    return f"{symbol}.NS"
+    if default_suffix:
+        return f"{symbol}.{default_suffix.upper()}"
+    return symbol
 
 
-def _compute_stats_for_symbol(symbol: str, history_days: int = 420) -> TickerStats:
-    yf_symbol = to_yf_symbol(symbol)
+def _compute_stats_for_symbol(symbol: str, history_days: int = 420, default_suffix: Optional[str] = None) -> TickerStats:
+    yf_symbol = to_yf_symbol(symbol, default_suffix=default_suffix)
     url = (
         "https://query1.finance.yahoo.com/v8/finance/chart/"
         f"{requests.utils.quote(yf_symbol)}"
@@ -104,14 +106,14 @@ def _compute_stats_for_symbol(symbol: str, history_days: int = 420) -> TickerSta
                            pct_from_52w_low=None, pct_from_52w_high=None)
 
 
-def fetch_stats_for_symbols(symbols: Iterable[str], max_workers: int = 8) -> List[TickerStats]:
+def fetch_stats_for_symbols(symbols: Iterable[str], max_workers: int = 8, default_suffix: Optional[str] = None) -> List[TickerStats]:
     """
     Fetch stats for a collection of symbols concurrently.
     """
     unique_symbols = [s for s in dict.fromkeys(symbols)]  # preserve order, dedupe
     results: List[TickerStats] = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        future_map = {executor.submit(_compute_stats_for_symbol, s): s for s in unique_symbols}
+        future_map = {executor.submit(_compute_stats_for_symbol, s, 420, default_suffix): s for s in unique_symbols}
         for fut in concurrent.futures.as_completed(future_map):
             res = fut.result()
             results.append(res)
