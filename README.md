@@ -8,16 +8,26 @@ FastAPI web app that parses `Hemant_Jain_Stock_Lists_Reference.md` and shows liv
 - Clean, responsive tables per universe
 
 ## Requirements
-- Python 3.10+
+- Python 3.10+ (recommended)
 
 ## Quick Start
 
 ```bash
-cd /home/oraon-as/Documents/Personal/Trading
+cd /home/oraon-as/Documents/Personal/coding/github/universe-stats
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r webapp/requirements.txt
-uvicorn webapp.main:app --reload --host 0.0.0.0 --port 8000
+pip install -r requirements.txt
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Then open: http://localhost:8000
+
+## Run with Docker (portable)
+
+```bash
+cd /home/oraon-as/Documents/Personal/coding/github/universe-stats
+docker build -t universe-stats .
+docker run --rm -p 8000:8000 universe-stats
 ```
 
 Then open: http://localhost:8000

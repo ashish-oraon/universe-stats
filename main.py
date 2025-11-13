@@ -6,13 +6,12 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from webapp.parsers.reference_parser import parse_universes
-from webapp.services.market_data import fetch_stats_for_symbols
+from parsers.json_loader import load_universes_from_json
+from services.market_data import fetch_stats_for_symbols
 
 
 APP_ROOT = Path(__file__).resolve().parent
-WORKSPACE_ROOT = APP_ROOT.parent
-REFERENCE_MD_PATH = WORKSPACE_ROOT / "Hemant_Jain_Stock_Lists_Reference.md"
+DATA_DIR = APP_ROOT / "data"
 
 app = FastAPI(title="Hemant Jain Universe Dashboard")
 
@@ -28,7 +27,7 @@ UNIVERSE_SYMBOLS: Dict[str, List[str]] = {}
 @app.on_event("startup")
 def startup_event() -> None:
     global UNIVERSE_SYMBOLS
-    UNIVERSE_SYMBOLS = parse_universes(REFERENCE_MD_PATH)
+    UNIVERSE_SYMBOLS = load_universes_from_json(DATA_DIR)
 
 
 @app.get("/", response_class=HTMLResponse)
